@@ -1,27 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main(){
-  var a float64
-  fmt.Print("Enter acceleration:")
-  fmt.Scanln(&a)
-  var v0 float64
-  fmt.Print("Enter the initial velocity:")
-  fmt.Scanln(&v0)
-  var s0 float64
-  fmt.Print("Enter initial displacement:")
-  fmt.Scanln(&s0)
-   var t float64
-  fmt.Print("Enter time:")
-  fmt.Scanln(&t)
-	fn := GenDisplaceFn(a, v0, s0)
-	fmt.Println(fn(3))
-	fmt.Println(fn(5))
+// s =Â½ a t2 + vot + so
+
+func GenDisplaceFn(a, vo, so float64) func(float64) float64 {
+
+	return func(t float64) float64 {
+		return ((0.5 * a * (t * t)) + (vo * t) + so)
+	}
 }
 
-func GenDisplaceFn(a,v0,s0 float64) func(float64) float64{
-	return func(t float64) float64 {
-		return 1/2*a*t*t+v0*t+s0
-	}
+func main() {
+
+	param := [4]float64{}
+
+	fmt.Printf(" %s\n", "Please enter acceleration ...  ")
+	fmt.Scan(&param[0])
+	fmt.Printf(" %s\n", "Please enter initial velocity ...  ")
+	fmt.Scan(&param[1])
+	fmt.Printf(" %s\n", "Please enter initial displacement ...  ")
+	fmt.Scan(&param[2])
+	fmt.Printf(" %s\n", "Please enter time (seconds) ...  ")
+	fmt.Scan(&param[3])
+
+	fn := GenDisplaceFn(param[0], param[1], param[2])
+
+	fmt.Printf("\n%s%v%s  ...   %v\n\n", "Displacement after ", param[3], " seconds", fn(param[3]))
+
 }
