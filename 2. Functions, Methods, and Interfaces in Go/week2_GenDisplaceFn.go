@@ -16,7 +16,7 @@ func GenDisplaceFn(a, vo, so float64) func(float64) float64 {
 func main() {
 
 	param := [4]float64{}
-
+	fmt.Printf(" %s\n", "Please enter initial velocity ...  ")
 	fmt.Printf(" %s\n", "Please enter acceleration ...  ")
 	fmt.Scan(&param[0])
 	fmt.Printf(" %s\n", "Please enter initial velocity ...  ")
